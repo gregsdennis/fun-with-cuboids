@@ -1,0 +1,47 @@
+﻿<Window x:Class="CuboidsApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CuboidsApp"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+				x:Name="Root"
+        d:DataContext="{d:DesignInstance {x:Type local:MainWindow}}">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition/>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+		<StackPanel Margin="10">
+			<TextBlock Text="Latest net:" Margin="0,10"/>
+			<local:NetLayout Net="{Binding LatestNet, ElementName=Root}"
+			                 DataContext="{Binding RelativeSource={x:Static RelativeSource.Self}}"/>
+			<TextBlock Margin="0,0,0,10">
+				<Run Text="Found nets (#"/>
+				<Run Text="{Binding CurrentNetIndex}"/>
+				<Run Text="):"/>
+			</TextBlock>
+			<local:NetLayout Net="{Binding CurrentNet, ElementName=Root}"
+			                 DataContext="{Binding RelativeSource={x:Static RelativeSource.Self}}"/>
+		</StackPanel>
+		<StackPanel Grid.Column="1" Margin="0,10,0,0">
+			<TextBlock>
+				<Run Text="Unique nets found: "/>
+				<Run Text="{Binding UniqueNetCount}"/>
+			</TextBlock>
+			<TextBlock>
+				<Run Text="Total nets processed: "/>
+				<Run Text="{Binding TotalNetCount}"/>
+			</TextBlock>
+			<TextBlock>
+				<Run Text="Nets processed /s: "/>
+				<Run Text="{Binding NetsGeneratedPerSecond}"/>
+			</TextBlock>
+			<TextBlock>
+				<Run Text="Run time /s: "/>
+				<Run Text="{Binding RunTime, StringFormat={}{0:d'd 'h'h 'm'm 's's'}}"/>
+			</TextBlock>
+		</StackPanel>
+	</Grid>
+</Window>
